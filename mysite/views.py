@@ -21,6 +21,7 @@ def add_consumption(request):
 
         response_data['status_code'] = 200
         response_data['message'] = 'OK'
+        response_data['content'] = body
     else:
         response_data['status_code'] = 400
         response_data['message'] = "Bad Request"
