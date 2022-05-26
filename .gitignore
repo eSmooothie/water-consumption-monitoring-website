@@ -1,5 +1,5 @@
 .env
-
+note.txt
 */__pycache__/
 
 db.sqlite3
