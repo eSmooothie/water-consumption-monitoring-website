@@ -1,0 +1,103 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Water Consumption Monitoring</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- FONTAWSOME -->
+		<script src="https://kit.fontawesome.com/b24469f289.js" crossorigin="anonymous"></script>
+		<!-- FLOWBITE -->
+		<link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+		<!-- JQUERY -->
+		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+		<!-- TAILWINDCSS -->
+		{% tailwind_preload_css %}
+		{% tailwind_css %}
+	</head>
+	<body class="bg-gray-50 leading-normal tracking-normal min-h-full font-sans">
+		<!-- HEADER -->
+		<header>
+			<div class=" h-14 flex items-center p-3 bg-blue-400">
+				<h1 class=" font-bold text-xl">Water Consumption Monitoring</h1>
+			</div>
+		</header>
+		<!-- CONTENT -->
+		<section>
+			<section class=" py-3 mb-5">
+				<div class="flex flex-col items-center">
+					<div class="flex items-end">
+						<p class="text-7xl" id="amount_to_pay">{{ total_amount }}</p>
+						<p class="text-xl">PHP</p>
+					</div>
+					<p class="uppercase font-bold text-gray-500 mb-5">amount to pay</p>
+					<a href="/paid" class=" py-2 px-3 font-medium
+					rounded-md w-[10%] text-center bg-green-400 hover:bg-green-500 grid grid-cols-5 content-center">
+						<span class=" col-span-1"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+						<span class=" col-span-4">PAID</span>
+					</a>
+				</div>
+			</section>
+			<section class=" px-4">
+				<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+					<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+						<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+							<tr>
+								<th colspan="5" class="px-6 py-3 bg-blue-400 text-black text-lg">
+									Consumption
+								</th>
+							</tr>
+							<tr>
+								<th scope="col" class="px-6 py-3">
+									Date and Time
+								</th>
+								<th scope="col" class="px-6 py-3">
+									Elapsed Time (minutes)
+								</th>
+								<th scope="col" class="px-6 py-3">
+									Cubic Meter <br>(Assume: 1min = 1cu. m)
+								</th>
+								<th scope="col" class="px-6 py-3">
+									Peso / cubic meter
+								</th>
+								<th scope="col" class="px-6 py-3">
+									Amount
+								</th>
+							</tr>
+						</thead>
+						<tbody id="consumption_tbody">
+							{% for consumption in consumptions %}
+								<tr class="bg-white border-b ">
+									<th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+										{{ consumption }}
+									</th>
+									<td class="px-6 py-4">
+										{{ consumption.timelapse_in_min }}
+									</td>
+									<td class="px-6 py-4">
+										{{ consumption.cubic_per_meter }} cu. m
+									</td>
+									<td class="px-6 py-4">
+										{{ consumption.peso_per_cu_m }}
+									</td>
+									<td class="px-6 py-4">
+										{{ consumption.amount }} PHP
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+	
+			</section>
+		</section>
+		<!-- FOOTER -->
+		<footer>
+
+		</footer>
+		<script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+		<script src="{% static 'app.js' %}"></script>
+	</body>
+</html>

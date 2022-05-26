@@ -45,7 +45,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     'mysite.apps.MysiteConfig',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
 ]
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 
@@ -65,7 +77,7 @@ ROOT_URLCONF = 'water_consumption_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, "theme/templates")),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,9 +126,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
@@ -129,8 +143,10 @@ STATIC_URL = 'static/'
 
 #location where django collect all static files
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-# location where you will store your static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'water_consumption_site\static')]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
