@@ -40,11 +40,11 @@ def get_consumption(request):
 
         response_data["consumptions_data"] = raw_data
 
-        total_amount = "0.00"
         if consumptions:
             total_amount = Consumption.objects.aggregate(total_amount=Sum('amount'))['total_amount'] 
-
-        response_data["total_amount"] = round(total_amount, 2)
+            response_data["total_amount"] = round(total_amount, 2)
+        else:
+            response_data["total_amount"] = "0.0"
 
     else:
         response_data["status_code"] = 400

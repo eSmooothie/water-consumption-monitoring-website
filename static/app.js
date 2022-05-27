@@ -9,11 +9,8 @@ var tbody = document.getElementById('consumption_tbody');
 $(document).ready(function(){
     // every 3 sec table the table will refresh its data
     setInterval(function(){
-        while(tbody.firstChild){
-            tbody.removeChild(tbody.firstChild)
-        }
         getRequest();
-    }, 3000);
+    }, 500);
 });
 
 function getRequest(){
@@ -28,36 +25,51 @@ function getRequest(){
         status_code = data['status_code'];
         if(status_code == 200){
 
-            consumptions = data['consumptions_data'];
+            var consumptions = data['consumptions_data'];
             document.getElementById('amount_to_pay').innerHTML = data['total_amount'];
+
+            var latest_data = -1;
+            if(tbody.childElementCount > 0){
+                latest_data = tbody.children[0];
+            }
+            
+
             for (const key in consumptions) {
                 if (Object.hasOwnProperty.call(consumptions, key)) {
                     const consumption = consumptions[key];
-                    
-                    let clone_tr = tr.cloneNode();
 
-                    let clone_th = th.cloneNode();
-                    clone_th.innerHTML = consumption['created_at'];
+                    if(consumption['id'] == latest_data.id){
+                        break;
+                    }
 
-                    let elapsed_time_td = td.cloneNode();
-                    elapsed_time_td.innerHTML = consumption['timelapse_in_min'];
+                    if(consumption['id'] != latest_data.id){
 
-                    let cubic_meter_td = td.cloneNode();
-                    cubic_meter_td.innerHTML = consumption['cubic_per_meter'];
+                        let clone_tr = tr.cloneNode();
+                        clone_tr.setAttribute('id', consumption['id']);
 
-                    let amount_td = td.cloneNode();
-                    amount_td.innerHTML = consumption['amount'];
+                        let clone_th = th.cloneNode();
+                        clone_th.innerHTML = consumption['created_at'];
 
-                    let peso_per_cub_td = td.cloneNode();
-                    peso_per_cub_td.innerHTML = consumption['peso_per_cu_m'];
+                        let elapsed_time_td = td.cloneNode();
+                        elapsed_time_td.innerHTML = consumption['timelapse_in_min'];
 
-                    clone_tr.appendChild(clone_th);
-                    clone_tr.appendChild(elapsed_time_td);
-                    clone_tr.appendChild(cubic_meter_td);
-                    clone_tr.appendChild(peso_per_cub_td);
-                    clone_tr.appendChild(amount_td);
+                        let cubic_meter_td = td.cloneNode();
+                        cubic_meter_td.innerHTML = consumption['cubic_per_meter'] + " cu. m";
 
-                    tbody.appendChild(clone_tr);
+                        let amount_td = td.cloneNode();
+                        amount_td.innerHTML = consumption['amount'] + " PHP";
+
+                        let peso_per_cub_td = td.cloneNode();
+                        peso_per_cub_td.innerHTML = consumption['peso_per_cu_m'];
+
+                        clone_tr.appendChild(clone_th);
+                        clone_tr.appendChild(elapsed_time_td);
+                        clone_tr.appendChild(cubic_meter_td);
+                        clone_tr.appendChild(peso_per_cub_td);
+                        clone_tr.appendChild(amount_td);
+
+                        tbody.prepend(clone_tr);
+                    }
                 }
             }
         }

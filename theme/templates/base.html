@@ -34,7 +34,7 @@
 					</div>
 					<p class="uppercase font-bold text-gray-500 mb-5">amount to pay</p>
 					<a href="/paid" class=" py-2 px-3 font-medium
-					rounded-md w-[10%] text-center bg-green-400 hover:bg-green-500 grid grid-cols-5 content-center">
+					rounded-md w-36 text-center bg-green-400 hover:bg-green-500 grid grid-cols-5 content-center">
 						<span class=" col-span-1"><i class="fa-solid fa-file-invoice-dollar"></i></span>
 						<span class=" col-span-4">PAID</span>
 					</a>
@@ -69,7 +69,7 @@
 						</thead>
 						<tbody id="consumption_tbody">
 							{% for consumption in consumptions %}
-								<tr class="bg-white border-b ">
+								<tr id="{{ consumption.id }}" class="bg-white border-b ">
 									<th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
 										{{ consumption }}
 									</th>
@@ -88,6 +88,15 @@
 								</tr>
 							{% endfor %}
 						</tbody>
+						<tfoot>
+							<tr class="bg-white border-b text-white">
+								<td  class="px-6 py-4 font-medium dark:text-white whitespace-nowrap">XX/XX/XXXX XX:XX:XX XX</td>
+								<td class="px-6 py-4">XX.XX</td>
+								<td class="px-6 py-4">XX.XX cu. m</td>
+								<td class="px-6 py-4">X.XX</td>
+								<td class="px-6 py-4">XX.XX PHP</td>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 	
