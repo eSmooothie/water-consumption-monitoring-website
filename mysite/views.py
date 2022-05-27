@@ -101,7 +101,10 @@ def add_consumption(request):
     response_data = {}
     
     if request.method == "POST":
-        body_unicode = request.body.decode('utf-8')
+        body_unicode = request.body
+
+        print("at add_consumption: body_unicode: {0}".format(body_unicode))
+
         body = json.loads(body_unicode)
 
         print("at add_consumption: body: {0}".format(body))
