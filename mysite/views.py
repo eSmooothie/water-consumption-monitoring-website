@@ -22,6 +22,44 @@ def index(request):
         }
     return render(request, 'mysite/index.html', data)
 
+def historical_data(request):
+
+    data = {}
+
+    consumptions = Consumption_History.objects.all().order_by("-date_created")
+
+    data['consumptions'] = consumptions
+
+    return render(request, "mysite/historical_data.html", data)
+
+def get_history_consumption(request):
+    response_data = {}
+    if request.method == 'GET':
+
+        consumptions = Consumption_History.objects.all().order_by("-date_created")
+
+        response_data["status_code"] = 200
+        response_data["message"] = 'OK'
+
+        data = []
+        label = []
+
+        for consumption in consumptions:
+            dict_model = model_to_dict(consumption)
+            data.append(dict_model)
+
+        for consumption in consumptions:
+            label.append(consumption.date_created)
+
+        response_data["consumptions_data"] = data
+        response_data["label"] = label
+
+    else:
+        response_data["status_code"] = 400
+        response_data["message"] = 'Bad request'
+
+    return JsonResponse(response_data)
+
 def get_consumption(request):
     response_data = {}
     if request.method == 'GET':

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>Water Consumption Monitoring</title>
+    <title>WCM | Home</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -20,10 +20,26 @@
 	<body class="bg-gray-50 leading-normal tracking-normal min-h-full font-sans">
 		<!-- HEADER -->
 		<header>
-			<div class=" h-14 flex items-center p-3 bg-blue-400">
-				<h1 class=" font-bold text-xl">Water Consumption Monitoring</h1>
+			<div class=" h-14 flex items-end justify-between px-3 bg-blue-600 text-white">
+				<div class="h-full flex items-center">
+					<a href="/" class=" font-bold text-xl">Water Consumption Monitoring</a>
+				</div>
 			</div>
 		</header>
+		<aside>
+			<a href="historical_data" class="fixed rounded-full h-14 w-14 flex 
+			justify-center items-center drop-shadow-lg bg-white 
+			 hover:outline-none hover:ring hover:ring-blue-600
+			right-2 top-10 z-50 
+			" data-tooltip-target="tooltip-left" data-tooltip-placement="left">
+				<i class="fa-solid fa-chart-line fa-xl"></i>
+			</a>
+			<div id="tooltip-left" role="tooltip" class="inline-block absolute invisible z-10 py-2 
+			px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+				Historical Data
+				<div class="tooltip-arrow" data-popper-arrow></div>
+			</div>
+		</aside>
 		<!-- CONTENT -->
 		<section>
 			<section class=" py-3 mb-5">
@@ -34,7 +50,9 @@
 					</div>
 					<p class="uppercase font-bold text-gray-500 mb-5">amount to pay</p>
 					<a href="/paid" class=" py-2 px-3 font-medium
-					rounded-md w-36 text-center bg-green-400 hover:bg-green-500 grid grid-cols-5 content-center">
+					rounded-md w-36 text-center bg-green-400 hover:bg-green-500 grid grid-cols-5 content-center
+					hover:outline-none hover:ring hover:ring-green-300
+					">
 						<span class=" col-span-1"><i class="fa-solid fa-file-invoice-dollar"></i></span>
 						<span class=" col-span-4">PAID</span>
 					</a>
@@ -45,7 +63,7 @@
 					<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 						<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 							<tr>
-								<th colspan="5" class="px-6 py-3 bg-blue-400 text-black text-lg">
+								<th colspan="5" class="px-6 py-3 bg-blue-600 text-white text-lg">
 									Consumption
 								</th>
 							</tr>
@@ -107,6 +125,6 @@
 
 		</footer>
 		<script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
-		<script src="{% static 'consumption_table_reload.js' %}"></script>
+		<!-- <script src="{% static 'consumption_table_reload.js' %}"></script> -->
 	</body>
 </html>

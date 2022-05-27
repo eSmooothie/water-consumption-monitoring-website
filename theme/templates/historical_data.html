@@ -1,0 +1,119 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>WCM | Chart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- FONTAWSOME -->
+        <script src="https://kit.fontawesome.com/b24469f289.js" crossorigin="anonymous"></script>
+        <!-- FLOWBITE -->
+        <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+        <!-- JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <!-- TAILWINDCSS -->
+        {% tailwind_preload_css %}
+        {% tailwind_css %}
+    </head>
+    <body>
+        <!-- HEADER -->
+		<header>
+			<div class=" h-14 flex items-center p-3 bg-blue-600 text-white">
+				<h1 class=" font-bold text-xl">Water Consumption Monitoring</h1>
+			</div>
+		</header>
+		<aside>
+			<a href="/" class="fixed rounded-full h-14 w-14 flex 
+			justify-center items-center drop-shadow-lg bg-white 
+			 hover:outline-none hover:ring hover:ring-blue-600
+			right-2 top-10 z-50 
+			" data-tooltip-target="tooltip-left-home" data-tooltip-placement="left">
+                <i class="fa-solid fa-house"></i>
+			</a>
+			<div id="tooltip-left-home" role="tooltip" class="inline-block absolute invisible z-10 py-2 
+                px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+				Back to Home
+				<div class="tooltip-arrow" data-popper-arrow></div>
+			</div>
+		</aside>
+        <!-- GRAPH -->
+        <section class="sm:flex justify-center mb-4 py-4">
+            <div>
+                <h1 class=" text-center uppercase font-bold text-xl mb-2">Consumption <br />data visualization</h1>
+                <div class=" sm:h-[50vh] sm:w-[65vw] h-[50vh] sm:border border-blue-600 rounded-md p-3">
+                    <p class=" text-xs text-center">(Click the legend to hide and show the data of a category.)</p>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            
+        </section>
+        <!-- TABLE -->
+        <section class=" px-4">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th colspan="5" class="px-6 py-3 bg-blue-600 text-white text-lg">
+                                Consumption Historical Data
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Date and Time
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Elapsed Time (minutes)
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cubic Meter <br>(Assume: 1min = 1cu. m)
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Peso / cubic meter
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Amount
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="consumption_tbody">
+                        {% for consumption in consumptions %}
+                            <tr id="{{ consumption.id }}" class="bg-white border-b ">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    {{ consumption }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ consumption.timelapse_in_min }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ consumption.cubic_per_meter }} cu. m
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ consumption.peso_per_cu_m }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ consumption.amount }} PHP
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="bg-white border-b text-white">
+                            <td  class="px-6 py-4 font-medium dark:text-white whitespace-nowrap">XX/XX/XXXX XX:XX:XX XX</td>
+                            <td class="px-6 py-4">XX.XX</td>
+                            <td class="px-6 py-4">XX.XX cu. m</td>
+                            <td class="px-6 py-4">X.XX</td>
+                            <td class="px-6 py-4">XX.XX PHP</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+        <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
+        <script src="{% static 'consumption_chart.js' %}"></script>
+    </body>
+</html>
