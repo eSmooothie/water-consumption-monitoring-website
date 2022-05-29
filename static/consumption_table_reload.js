@@ -10,7 +10,7 @@ $(document).ready(function(){
     // every 3 sec table the table will refresh its data
     setInterval(function(){
         getRequest();
-    }, 500);
+    }, 1000);
 });
 
 function getRequest(){
