@@ -33,7 +33,7 @@
                 <i class="fa-solid fa-house"></i>
 			</a>
 			<div id="tooltip-left-home" role="tooltip" class="inline-block absolute invisible z-10 py-2 
-                px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ">
 				Back to Home
 				<div class="tooltip-arrow" data-popper-arrow></div>
 			</div>
@@ -52,8 +52,8 @@
         <!-- TABLE -->
         <section class=" px-4">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table class="w-full text-sm text-left text-gray-500 ">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                         <tr>
                             <th colspan="5" class="px-6 py-3 bg-blue-600 text-white text-lg">
                                 Consumption Historical Data
@@ -80,7 +80,7 @@
                     <tbody id="consumption_tbody">
                         {% for consumption in consumptions %}
                             <tr id="{{ consumption.id }}" class="bg-white border-b ">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     {{ consumption }}
                                 </th>
                                 <td class="px-6 py-4">
@@ -100,7 +100,7 @@
                     </tbody>
                     <tfoot>
                         <tr class="bg-white border-b text-white">
-                            <td  class="px-6 py-4 font-medium dark:text-white whitespace-nowrap">XX/XX/XXXX XX:XX:XX XX</td>
+                            <td  class="px-6 py-4 font-medium whitespace-nowrap">XX/XX/XXXX XX:XX:XX XX</td>
                             <td class="px-6 py-4">XX.XX</td>
                             <td class="px-6 py-4">XX.XX cu. m</td>
                             <td class="px-6 py-4">X.XX</td>
