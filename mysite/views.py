@@ -112,10 +112,11 @@ def add_consumption(request):
         
         elapsed_time = body["elapsed_time"]
         elapsed_time_in_min = convert_sec_to_min(elapsed_time)
-
-        amount = elapsed_time_in_min * 0.5
-
+        
         peso_per_cu_m = 0.5
+
+        amount = elapsed_time_in_min * peso_per_cu_m
+
 
         new_consumption = Consumption(
             timelapse_in_min = round(elapsed_time_in_min,2),
