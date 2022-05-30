@@ -32,7 +32,8 @@ if os.path.isfile(dotenv_file):
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'water-consumption-site.herokuapp.com/',
+    
+    'water-consumption-site.herokuapp.com',
     '127.0.0.1',
 ]
 
