@@ -32,7 +32,7 @@ if os.path.isfile(dotenv_file):
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'https://water-consumption-site.herokuapp.com/',
+    'water-consumption-site.herokuapp.com/',
     '127.0.0.1',
 ]
 
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'mysite.apps.MysiteConfig',
     'tailwind',
     'theme',
-    'django_browser_reload',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -70,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 
