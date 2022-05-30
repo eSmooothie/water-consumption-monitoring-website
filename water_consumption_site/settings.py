@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from logging.handlers import SysLogHandler
 from pathlib import Path
 import os
 import django_heroku
@@ -30,11 +29,10 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = [
-    
-    '.herokuapp.com',
+    'water-consumption-site.herokuapp.com',
     '127.0.0.1',
 ]
 
@@ -48,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',
     'mysite.apps.MysiteConfig',
     'tailwind',
     'theme',
@@ -102,7 +99,7 @@ import dj_database_url
 
 DATABASES = {}
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(conn_max_age=500, ssl_require=True)
 
 
 # Password validation
