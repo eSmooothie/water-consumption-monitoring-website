@@ -122,9 +122,9 @@ def add_consumption(request):
         if elapsed_time_in_min['min'] != 0 and elapsed_time_in_min['sec'] != 0:
             time_format = "{0}m {1}s".format(int(elapsed_time_in_min['min']), int(elapsed_time_in_min['sec']))
         elif elapsed_time_in_min['min'] == 0:
-            time_format = "{0}s".format(elapsed_time_in_min['sec'])
+            time_format = "{0}s".format(int(elapsed_time_in_min['sec']))
         elif elapsed_time_in_min['sec'] == 0:
-            time_format = "{0}m".format(elapsed_time_in_min['min'])
+            time_format = "{0}m".format(int(elapsed_time_in_min['min']))
 
         new_consumption = Consumption(
             timelapse_in_min = round(elapsed_time_in_min['raw_min'], 2),
