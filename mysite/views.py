@@ -111,6 +111,7 @@ def add_consumption(request):
 
         
         elapsed_time = body["elapsed_time"]
+        elapsed_time = round(elapsed_time, 0)
         elapsed_time_in_min = convert_sec_to_min(elapsed_time)
         
         peso_per_cu_m = 0.24 #
