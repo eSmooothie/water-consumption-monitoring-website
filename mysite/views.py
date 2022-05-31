@@ -120,7 +120,7 @@ def add_consumption(request):
 
         time_format = ""
         if elapsed_time_in_min['min'] != 0 and elapsed_time_in_min['sec'] != 0:
-            time_format = "{0}m {1}s".format(elapsed_time_in_min['min'], elapsed_time_in_min['sec'])
+            time_format = "{0}m {1}s".format(int(elapsed_time_in_min['min']), int(elapsed_time_in_min['sec']))
         elif elapsed_time_in_min['min'] == 0:
             time_format = "{0}s".format(elapsed_time_in_min['sec'])
         elif elapsed_time_in_min['sec'] == 0:
