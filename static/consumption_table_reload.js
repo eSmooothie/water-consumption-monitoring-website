@@ -37,13 +37,13 @@ function getRequest(){
             for (const key in consumptions) {
                 if (Object.hasOwnProperty.call(consumptions, key)) {
                     const consumption = consumptions[key];
-
+                    
                     if(consumption['id'] == latest_data.id){
                         break;
                     }
 
                     if(consumption['id'] != latest_data.id){
-
+                        
                         let clone_tr = tr.cloneNode();
                         clone_tr.setAttribute('id', consumption['id']);
 
@@ -51,7 +51,7 @@ function getRequest(){
                         clone_th.innerHTML = consumption['created_at'];
 
                         let elapsed_time_td = td.cloneNode();
-                        elapsed_time_td.innerHTML = consumption['timelapse_in_min'];
+                        elapsed_time_td.innerHTML = consumption['timelapse_format'];
 
                         let cubic_meter_td = td.cloneNode();
                         cubic_meter_td.innerHTML = consumption['cubic_per_meter'] + " cu. m";

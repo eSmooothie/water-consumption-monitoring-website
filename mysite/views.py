@@ -115,19 +115,28 @@ def add_consumption(request):
         
         peso_per_cu_m = 0.24 #
 
-        amount = elapsed_time_in_min * peso_per_cu_m
+        amount = elapsed_time_in_min['raw_min'] * peso_per_cu_m
 
+        time_format = ""
+        if elapsed_time_in_min['min'] != 0 and elapsed_time_in_min['sec'] != 0:
+            time_format = "{0}m {1}s".format(elapsed_time_in_min['min'], elapsed_time_in_min['sec'])
+        elif elapsed_time_in_min['min'] == 0:
+            time_format = "{0}s".format(elapsed_time_in_min['sec'])
+        elif elapsed_time_in_min['sec'] == 0:
+            time_format = "{0}m".format(elapsed_time_in_min['min'])
 
         new_consumption = Consumption(
-            timelapse_in_min = round(elapsed_time_in_min,2),
-            cubic_per_meter = round(elapsed_time_in_min,2),
+            timelapse_in_min = round(elapsed_time_in_min['raw_min'], 2),
+            cubic_per_meter = round(elapsed_time_in_min['raw_min'], 2),
+            timelapse_format = time_format,
             peso_per_cu_m = peso_per_cu_m,
             amount = round(amount,2)
         )
 
         new_consumption_hist = Consumption_History(
-            timelapse_in_min = round(elapsed_time_in_min,2),
-            cubic_per_meter = round(elapsed_time_in_min,2),
+            timelapse_in_min = round(elapsed_time_in_min['raw_min'], 2),
+            cubic_per_meter = round(elapsed_time_in_min['raw_min'], 2),
+            timelapse_format = time_format,
             peso_per_cu_m = peso_per_cu_m,
             amount = round(amount,2)
         )
@@ -144,5 +153,8 @@ def add_consumption(request):
     
     return JsonResponse(response_data)
 
-def convert_sec_to_min(sec : float):
-    return sec / 60
+def convert_sec_to_min(elapsed_time : float):
+    raw_min = elapsed_time / 60
+    min = elapsed_time // 60
+    sec = elapsed_time - (min * 60)
+    return {"min":min, "sec":sec, "raw_min": raw_min}
