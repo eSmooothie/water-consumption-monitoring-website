@@ -34,3 +34,12 @@ class Consumption_History(models.Model):
     def __str__(self):
         curr_datetime = timezone.localtime(self.date_created)
         return "{0}".format(curr_datetime.strftime("%d/%m/%Y %H:%M:%S"))
+
+
+class WaterPrice(models.Model):
+    date_created = models.DateTimeField(auto_now_add=True)
+    price_per_cubic = models.FloatField()
+
+    def __str__(self):
+        curr_datetime = timezone.localtime(self.date_created)
+        return "On {0} the price is {1}".format(curr_datetime.strftime("%d/%m/%Y"), self.price_per_cubic)

@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from django.forms.models import model_to_dict
 
-from .models import Consumption, Consumption_History
+from .models import Consumption, Consumption_History, WaterPrice
 
 import json
 # Create your views here.
@@ -114,9 +114,9 @@ def add_consumption(request):
         elapsed_time = round(elapsed_time, 0)
         elapsed_time_in_min = convert_sec_to_min(elapsed_time)
         
-        peso_per_cu_m = 0.24 #
+        peso_per_cu_m = WaterPrice.objects.all().order_by("-date_created").first()
 
-        amount = elapsed_time_in_min['raw_min'] * peso_per_cu_m
+        amount = elapsed_time_in_min['raw_min'] * peso_per_cu_m.price_per_cubic
 
         time_format = ""
         if elapsed_time_in_min['min'] != 0 and elapsed_time_in_min['sec'] != 0:
@@ -130,7 +130,7 @@ def add_consumption(request):
             timelapse_in_min = round(elapsed_time_in_min['raw_min'], 2),
             cubic_per_meter = round(elapsed_time_in_min['raw_min'], 2),
             timelapse_format = time_format,
-            peso_per_cu_m = peso_per_cu_m,
+            peso_per_cu_m = peso_per_cu_m.price_per_cubic,
             amount = round(amount,2)
         )
 
@@ -138,7 +138,7 @@ def add_consumption(request):
             timelapse_in_min = round(elapsed_time_in_min['raw_min'], 2),
             cubic_per_meter = round(elapsed_time_in_min['raw_min'], 2),
             timelapse_format = time_format,
-            peso_per_cu_m = peso_per_cu_m,
+            peso_per_cu_m = peso_per_cu_m.price_per_cubic,
             amount = round(amount,2)
         )
         
