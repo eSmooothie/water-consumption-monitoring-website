@@ -1,7 +1,7 @@
 var tr = document.createElement('tr');
 tr.classList.add('bg-white', 'border-b');
 var th = document.createElement('th');
-th.classList.add('px-6', 'py-4', 'font-medium', 'text-gray-900', 'dark:text-white', 'whitespace-nowrap');
+th.classList.add('px-6', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap');
 var td = document.createElement('td');
 td.classList.add('px-6', 'py-4');
 var tbody = document.getElementById('consumption_tbody');
